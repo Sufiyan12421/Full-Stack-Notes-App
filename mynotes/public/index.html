@@ -1,24 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <title>React App</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modern Notes App</title>
+
+    <!-- Link to the CSS file -->
+    <link rel="stylesheet" href="main.css" />
   </head>
+
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
+    <div class="container">
+      <div class="app">
+        <!-- Header -->
+        <header class="app-header">
+          <h1>My Notes</h1>
+          <button id="toggle-theme">🌗</button>
+        </header>
+
+        <!-- Notes List View -->
+        <div class="app-body">
+          <div class="notes-header">
+            <h2 class="notes-title">Recent Notes</h2>
+            <span class="notes-count">3 Notes</span>
+          </div>
+
+          <div class="notes-list">
+            <div class="notes-list-item">
+              <h3>Project Ideas</h3>
+              <p><span>#Design</span> Explore new UI styles for next project.</p>
+            </div>
+            <div class="notes-list-item">
+              <h3>Meeting Notes</h3>
+              <p><span>#Work</span> Discuss roadmap and release plan.</p>
+            </div>
+            <div class="notes-list-item">
+              <h3>Personal Goals</h3>
+              <p><span>#Self</span> Exercise and learn something new daily.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Floating Button -->
+        <button class="floating-button">+</button>
+      </div>
+    </div>
+
+    <!-- Simple Dark Mode Toggle -->
+    <script>
+      const toggleBtn = document.getElementById('toggle-theme');
+      toggleBtn.addEventListener('click', () => {
+        document.body.classList.toggle('dark');
+      });
+    </script>
   </body>
 </html>
+
