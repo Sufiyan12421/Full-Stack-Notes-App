@@ -1,29 +1,45 @@
-@Library('Shared')_
-pipeline{
-    agent { label 'dev-server'}
-    
-    stages{
-        stage("Code clone"){
-            steps{
-                sh "whoami"
-            clone("https://github.com/Sufiyan12421/Full-Stack-Notes-App.git","main")
+@Library("Shared") _
+pipeline {
+    agent { label 'worker' }
+
+    stages {
+        stage("Hello") {
+            steps {
+                script {
+                    hello()
+                }
             }
         }
-        stage("Code Build"){
-            steps{
-            dockerbuild("notes-app","latest")
+
+        stage("Code") {
+            steps {
+                script {
+                    clone(repoUrl: "https://github.com/Sufiyan12421/Full-Stack-Notes-App.git", branch: "main")
+                }
             }
         }
-        stage("Push to DockerHub"){
-            steps{
-                dockerpush("dockerHubCreds","notes-app","latest")
+
+        stage("Build") {
+            steps {
+                script {
+                    docker_build(imageName: "notesapp", imageTag: "latest", user: "sufiyn")
+                }
             }
         }
-        stage("Deploy"){
-            steps{
-                deploy()
+
+        stage("Push to DockerHub") {
+            steps {
+                script {
+                    docker_push(imageName: "notesapp", imageTag: "latest", user: "sufiyn")
+                }
             }
         }
-        
+
+        stage("Deploy") {
+            steps {
+                echo "🚀 This is Deploying the Code"
+                sh "docker compose up -d"
+            }
+        }
     }
 }
